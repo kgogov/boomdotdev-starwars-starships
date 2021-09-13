@@ -3,25 +3,24 @@ import Starship from "./Starship";
 export default class StarWarsUniverse {
     constructor() {
         this.starships = [];
-
     }
 
     get theBestStarship() {
         if (this.starships.length === 0) return undefined;
 
-        let result = 0;
-        let index = 0;
+        let max = Number.MIN_SAFE_INTEGER;
+        let current = 0;
 
-        this.starships.forEach((starship, index) => {
-            let max = starship.maxDaysInSpace;
+        for (let index = 0; index < this.starships.length; index++) {
 
-            if (max > result) {
-                result = max;
-                index = index;
+            if (this.starships[index].maxDaysInSpace > max) {
+
+                max = this.starships[index].maxDaysInSpace;
+                current = index;
             }
-        });
+        }
 
-        return this.starships[index];
+        return this.starships[current];
     }
 
     _validateData(starship) {
@@ -47,7 +46,7 @@ export default class StarWarsUniverse {
                 if (!starship) continue;
 
                 if (this._validateData(starship)) {
-                    this.starships.push(new Starship(starship.consumables, starship.passengers));
+                    this.starships.push(new Starship(starship.name, starship.consumables, starship.passengers));
                 }
 
             } catch (error) {
