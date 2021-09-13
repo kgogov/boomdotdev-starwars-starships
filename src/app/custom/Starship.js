@@ -1,5 +1,6 @@
 export default class Starship {
-    constructor(consumables, passengers) {
+    constructor(name, consumables, passengers) {
+        this.name = name;
         this._consumables = this.parseConsumables(consumables);
         this._passengers = this.parsePassengers(passengers);
     }
